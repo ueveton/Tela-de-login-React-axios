@@ -16,9 +16,15 @@ export const Navbar = () => {
                     <ul className="dropdown-menu">
                         <li>
                             <Link className="dropdown-item" to="/registration">
+                                <i class="bi bi-person-add p-2"></i>
+                                Criar Conta
+                            </Link>
+                        </li>
+                        <li>
+                            <a className="dropdown-item" to="/registration">
                                 <i className="bi bi-people-fill p-2"></i>
                                 Perfil
-                            </Link>
+                            </a>
                         </li>
                         <li>
                             <Link className="dropdown-item" to="/login">
