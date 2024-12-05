@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import './Registration.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { FilePresent } from '@mui/icons-material'
+import axios from 'axios'
 
 export const Registration = () => {
     const [formData, setFormData] = useState({
@@ -13,6 +14,7 @@ export const Registration = () => {
 
     const [erros, setErros] = useState({})
     const [valid, setValid] = useState(true)
+    const navigate = useNavigate()
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -50,20 +52,26 @@ export const Registration = () => {
         setValid(isValid)
 
         if (Object.keys(validationErrors).length === 0) {
-            alert("Conta criada com sucesso!")
+            axios.post('http://localhost:3000/users', formData)
+            .then(result => 
+                alert("Conta criada com sucesso!"),
+                navigate('/login')
+            )
+            .catch(err => console.log(err))
+            //alert("Conta criada com sucesso!")
         }
 
     }
     return (
         <div className='container-back'>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 offset-md-3">
-                        <div class="signup-form">
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-6 offset-md-3">
+                        <div className="signup-form">
 
-                            <form class="mt-5 border p-4 bg-light shadow" onSubmit={handleSubmit}>
-                                <h4 class="mb-5 text-secondary">Crie uma conta para acessar o sistema </h4>
-                                <div class="row">
+                            <form className="mt-5 border p-4 bg-light shadow" onSubmit={handleSubmit}>
+                                <h4 className="mb-5 text-secondary">Crie uma conta para acessar o sistema </h4>
+                                <div className="row">
                                     {
                                         valid ? <></> :
                                             <span className='text-danger'>
@@ -71,52 +79,52 @@ export const Registration = () => {
                                                 {erros.password} {erros.cpassword}
                                             </span>
                                     }
-                                    <div class="mb-3 col-md-12">
-                                        <label>Nome:<span class="text-danger">*</span></label>
+                                    <div className="mb-3 col-md-12">
+                                        <label>Nome:<span className="text-danger">*</span></label>
                                         <input
                                             type="text"
                                             name="fname"
-                                            class="form-control"
+                                            className="form-control"
                                             placeholder="Digite o seu nome"
                                             onChange={(e) => setFormData({ ...formData, fname: e.target.value })}
                                         />
                                     </div>
-                                    <div class="mb-3 col-md-12">
-                                        <label>E-mail<span class="text-danger">*</span></label>
+                                    <div className="mb-3 col-md-12">
+                                        <label>E-mail<span className="text-danger">*</span></label>
                                         <input
                                             type="email"
                                             name="email"
-                                            class="form-control"
+                                            className="form-control"
                                             placeholder="Digite o seu e-mail"
                                             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                                         />
                                     </div>
-                                    <div class="mb-3 col-md-12">
-                                        <label>Senha<span class="text-danger">*</span></label>
+                                    <div className="mb-3 col-md-12">
+                                        <label>Senha<span className="text-danger">*</span></label>
                                         <input
                                             type="password"
                                             name="password"
-                                            class="form-control"
+                                            className="form-control"
                                             placeholder="Digite a senha"
                                             onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                                         />
                                     </div>
-                                    <div class="mb-3 col-md-12">
-                                        <label>Confirme a sua senha<span class="text-danger">*</span></label>
+                                    <div className="mb-3 col-md-12">
+                                        <label>Confirme a sua senha<span className="text-danger">*</span></label>
                                         <input
                                             type="password"
                                             name="cpassword"
-                                            class="form-control"
+                                            className="form-control"
                                             placeholder="Confirme a sua senha"
                                             onChange={(e) => setFormData({ ...formData, cpassword: e.target.value })}
                                         />
                                     </div>
-                                    <div class="col-md-12">
-                                        <button class="btn btn-primary float-end">Criar Conta</button>
+                                    <div className="col-md-12">
+                                        <button className="btn btn-primary float-end">Criar Conta</button>
                                     </div>
                                 </div>
                             </form>
-                            <p class="text-center mt-3 text-secondary">Se você tem uma conta, clique em <Link to="/login">Logar Agora</Link></p>
+                            <p className="text-center mt-3 text-secondary">Se você tem uma conta, clique em <Link to="/login">Logar Agora</Link></p>
                         </div>
                     </div>
                 </div>
