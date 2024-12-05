@@ -18,7 +18,6 @@ export const Registration = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(formData)
         let isValid = true;
         let validationErrors = {}
 
@@ -58,7 +57,6 @@ export const Registration = () => {
                 navigate('/login')
             )
             .catch(err => console.log(err))
-            //alert("Conta criada com sucesso!")
         }
 
     }
